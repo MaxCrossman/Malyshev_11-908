@@ -28,7 +28,7 @@ public class matrix41 {
 				}
 			if (x > y) {
 				y = x;
-				c = r;
+				c = i;
 			}
 			x = 0;
 			}
@@ -36,7 +36,7 @@ public class matrix41 {
 		if (y == -1) {
 			System.out.println("No identical numbers");
 			} else {
-				System.out.println("d: "+c+" |  n: "+y);
+				System.out.println("d: "+(c+1));
 			}
 	}
 }
