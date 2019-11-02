@@ -1,5 +1,7 @@
 public class sort {
 	public static void sortEvenOdd(int [] a) {
+		// суть задачи получить массив, в котором первая половина будет состоять из четных элементов,
+		// а вторая из нечетных.
 		int u = a.length;
 		int w = 0;
 		int u1 = u/2;
