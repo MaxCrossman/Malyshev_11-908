@@ -1,9 +1,6 @@
 package cw;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.StringBufferInputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 /**
  * Студент Малышев Максим
@@ -129,24 +126,23 @@ public class cw {
      * <p>
      * Результат записать в файл.
      */
-    public static void singSong() {
-        PrintStream ps = new PrintStream("song.txt");
-        System.setOut(ps);
-
-        System.out.print("\"");
-        for (int i = 99; i > 1; i++) {
-            System.out.println(i+" bottles of beer on the wall, "+i+" bottles of beer.");
-            System.out.println("Take one down and pass it around, "+(i-1)+" bottles of beer on the wall.");
-            System.out.println();
+    public static void singSong() throws IOException {
+        FileWriter fw = new FileWriter("song.txt");
+        int x = 99;
+        while (x != 0) {
+            fw.write(x + " bottles of beer on the wall, " + x + " bottles of beer. \n");
+            x--;
+            if (x == 0) {
+                fw.write("Take one down and pass it around, no more bottles of beer on the wall.\n\n");
+            } else {
+                fw.write("Take one down and pass it around, " + x + " bottles of beer on the wall.\n\n");
+            }
         }
-        System.out.println("1 bottle of beer on the wall, 1 bottle of beer.");
-        System.out.println("Take one down and pass it around, no more bottles of beer on the wall");
-        System.out.println();
-        System.out.println("No more bottles of beer on the wall, no more bottles of beer.");
-        System.out.print("Go to the store and buy some more, 99 bottles of beer on the wall.");
-        System.out.println("\"");
+        fw.write("No more bottles of beer on the wall, no more bottles of beer.\n");
+        bottle = 99;
+        fw.write("Go to the store and buy some more, " + bottle + " bottles of beer on the wall.");
+        fw.close();
 
-        ps.close();
     }
 
     /**
@@ -264,9 +260,15 @@ public class cw {
         /* TODO:
             Прочитайте из файла, полученного в предыдущем задании, текст и вычислите для него частотный словарь букв.
          */
+
         FileReader fr = new FileReader("song.txt");
-        Scanner sc =
-        String song = "";
+        Scanner sc = new Scanner(fr);
+        String nl = "";
+        while (sc.hasNextLine()) {
+            nl+= scan.nextLine();
+        }
+        fr.close();
+        String song = nl;
         System.out.printf("Частотный словарь букв: %n%s", lettersFrequency(song));
 
         /* TODO:
