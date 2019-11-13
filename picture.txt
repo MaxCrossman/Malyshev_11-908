@@ -1,0 +1,2 @@
+Picture extension: .jpg
+Picture name: image

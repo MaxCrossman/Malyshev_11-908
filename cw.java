@@ -265,7 +265,7 @@ public class cw {
         Scanner sc = new Scanner(fr);
         String nl = "";
         while (sc.hasNextLine()) {
-            nl+= scan.nextLine();
+            nlфыро+= scan.nextLine();
         }
         fr.close();
         String song = nl;
