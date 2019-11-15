@@ -1,5 +1,3 @@
-package cw;
-
 import java.io.*;
 
 /**
@@ -14,6 +12,7 @@ import java.io.*;
  * Задачи могут использовать результаты предыдущей задачи.
  * Если решить задачу не удалось, но она используется в следующей, вводите данные вручную.
  * Контрольная на 10 баллов.
+ * Итого 4,25 баллов.
  */
 public class cw {
     /**
@@ -31,6 +30,8 @@ public class cw {
      * 1.
      * Создать массив до заданного числа такой, что каждый элемент больше предыдущего на 7.
      * Первое значение случайное от 0 до 100.
+     * Параметр limit отвечает за предел значения, а не количество элементов.
+     * 0,5.
      */
     public static int[] getSevensArray(int limit) {
         int x = (int)(Math.random()*101);
@@ -45,8 +46,10 @@ public class cw {
     /**
      * 2.
      * Дан массив. Найти второй самый большой элемент.
+     * Считает не верно. 0,25.
      */
     public static int getSecondLargest(int[] array) {
+        array = new int[]{3, 2, 5, 4, 1, 0};
         int x = -1;
         int y = -1;
         for (int i: array) {
@@ -62,8 +65,8 @@ public class cw {
     /**
      * 3.
      * Написать метод сравнивающий два числа с плавающей точкой с точностью до двух разрадов.
-     *
-     * @return boolean
+     * Строки нельзя так сравнивать. Для этого используется метод equals().
+     * 0,5.
      */
     public static boolean isDoubleEquals(double a, double b) {
         boolean bu = false;
@@ -81,6 +84,7 @@ public class cw {
      * Число является простым является простым,
      * если оно больше 1 и при этом делится без остатка только на 1 и на себя.
      * Единица не простое число.
+     * Зачтено.
      */
     public static boolean isPrime(int x) {
         boolean bu = true;
@@ -98,6 +102,7 @@ public class cw {
      * 5.
      * Даны две строки: слово и разделитель, вывести строку содержащую количество вхождений слова, разделенноый разделителем.
      * Например, ("Word", "X", 3) => WordXWordXWord.
+     * Зачтено.
      */
     public static String repeatSeparator(String word, String sep, int count) {
         String piz = word;
@@ -125,6 +130,7 @@ public class cw {
      * Go to the store and buy some more, 99 bottles of beer on the wall."
      * <p>
      * Результат записать в файл.
+     * Не компилируется. Видимо откуда-то скопировали, да не успели поправить. 0.
      */
     public static void singSong() throws IOException {
         FileWriter fw = new FileWriter("song.txt");
@@ -139,8 +145,8 @@ public class cw {
             }
         }
         fw.write("No more bottles of beer on the wall, no more bottles of beer.\n");
-        bottle = 99;
-        fw.write("Go to the store and buy some more, " + bottle + " bottles of beer on the wall.");
+//        bottle = 99;
+//        fw.write("Go to the store and buy some more, " + bottle + " bottles of beer on the wall.");
         fw.close();
 
     }
@@ -167,21 +173,22 @@ public class cw {
      * Если последняя цифра числа из п.4 = 0, то контрольная цифра равна нулю.
      *
      * @return boolean
+     * Тоже самое. 0.
      */
     public static boolean isISBNValid(String str) {
         boolean bu = false;
         int x = 0;
         int y = 0;
-        for (int i = 1; i < 7; i++) {
-            x+= str.charAt(i*2).parseInt();
-        }
-        x*=3;
-        for (int i = 1; i < 7; i++) {
-            y+= str.charAt((i*2)-1).parseInt();
-        }
-        if (10-((x+y)%10)==str.charAt(12).parseInt()) {
-            bu = true;
-        }
+//        for (int i = 1; i < 7; i++) {
+//            x+= str.charAt(i*2).parseInt();
+//        }
+//        x*=3;
+//        for (int i = 1; i < 7; i++) {
+//            y+= str.charAt((i*2)-1).parseInt();
+//        }
+//        if (10-((x+y)%10)==str.charAt(12).parseInt()) {
+//            bu = true;
+//        }
         return bu;
     }
 
@@ -199,9 +206,10 @@ public class cw {
      * s: 1
      * v: 1
      * w: 1".
+     * Зачтено.
      */
     public static String lettersFrequency(String str) {
-        char [] abc = ['a','b','c','d','e','f','g','h','i','j','k','m','l','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+        char [] abc = {'a','b','c','d','e','f','g','h','i','j','k','m','l','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         int [] n = new int [26];
         for (int i = 0; i < 26; i++) {
             n[i] = 0;
@@ -228,7 +236,7 @@ public class cw {
      */
     public static void main(String[] args) {
         int[] sevens;
-        System.out.println("Массив \"семёрок\": " + (sevens = getSevensArray(200)));
+        System.out.println("Массив \"семёрок\": " + arrayToString(sevens = getSevensArray(200)));
         System.out.printf("Вторым самым большим элементом является %d.%n", getSecondLargest(sevens));
         /* TODO:
             Проверить является ли каждый элемент массива sevens простым.
@@ -241,35 +249,38 @@ public class cw {
         int [] primes = new int [200];
         for (int value : sevens) {
             if (isPrime(value)) {
-                primes++;
+//                primes++;
                 primes [j] = value;
 
             }
             j++;
         }
-        if (primes > 0) System.out.printf("Простые числа: %s : %d.%n", arrayToString(primes), primes.length);
-        else System.out.println("В массиве нет простых чисел.");
-
-        double a = Math.random() * 100;
-        double b = Math.random() * 100;
+//        if (primes > 0) System.out.printf("Простые числа: %s : %d.%n", arrayToString(primes), primes.length);
+//        else System.out.println("В массиве нет простых чисел.");
+        primes = new int[]{2, 113, 115};
+        for (int value : primes) {
+            System.out.println(value + ": " + isPrime(value));
+        }
+        double a = 1.123;  // Math.random() * 100;
+        double b = 1.1234; // Math.random() * 100;
         System.out.printf(isDoubleEquals(a, b) ? "Числа %f и %f равны, с точностью до эпсилон = 0,01.%n" : "Числа %f и %f не равны.%n", a, b);
 
         System.out.println("('Word', 'X', 3) => " + repeatSeparator("Word", "X", 3));
 
-        singSong();
+//        singSong();
         /* TODO:
             Прочитайте из файла, полученного в предыдущем задании, текст и вычислите для него частотный словарь букв.
          */
 
-        FileReader fr = new FileReader("song.txt");
-        Scanner sc = new Scanner(fr);
-        String nl = "";
-        while (sc.hasNextLine()) {
-            nlфыро+= scan.nextLine();
-        }
-        fr.close();
-        String song = nl;
-        System.out.printf("Частотный словарь букв: %n%s", lettersFrequency(song));
+//        FileReader fr = new FileReader("song.txt");
+//        Scanner sc = new Scanner(fr);
+//        String nl = "";
+//        while (sc.hasNextLine()) {
+//            nlфыро+= scan.nextLine();
+//        }
+//        fr.close();
+//        String song = nl;
+//        System.out.printf("Частотный словарь букв: %n%s", lettersFrequency(song));
 
         /* TODO:
             Прочитайте файл 'references.txt', в нем содержится список литературы, на каждоый строке новая запись.
@@ -278,5 +289,7 @@ public class cw {
         String filename = "references.txt";
         String entry = "";
         System.out.printf("Список литературы:%n%s%n", getBookName(entry));
+
+        System.out.println(lettersFrequency("abba"));
     }
 }
