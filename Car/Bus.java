@@ -23,4 +23,8 @@ public class Bus extends Car {
         System.out.print("\n      ");
         System.out.print("Количество пассажирских сидений: "+this.NumOfSeats);
     }
+
+    public int getNumOfSeats() {
+        return NumOfSeats;
+    }
 }

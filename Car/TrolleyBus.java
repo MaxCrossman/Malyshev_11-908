@@ -24,4 +24,8 @@ public class TrolleyBus extends Bus {
         System.out.print("\n      ");
         System.out.print("Электрическая тяга: "+this.eTraction);
     }
+
+    public int geteTraction() {
+        return eTraction;
+    }
 }

@@ -26,7 +26,6 @@ public class Car{
 		this.MaxSpeed = 120;
 		this.TrunkCapacity = 2.91;
 		this.point = new Point();
-
     }
 
     public void print() {
@@ -41,6 +40,30 @@ public class Car{
 		System.out.println("Введите значение дельты у: ");
     	int y = sc.nextInt();
     	this.point.move(x,y);
+	}
+
+	public String getModel(){
+    	return this.model;
+	}
+
+	public Color getColor(){
+    	return this.color;
+	}
+
+	public void setColor(Color color) {
+    	this.color = color;
+	}
+
+	public int getMaxSpeed() {
+    	return this.MaxSpeed;
+	}
+
+	public double getPower() {
+    	return this.power;
+	}
+
+	public double getTrunkCapacity() {
+    	return this.TrunkCapacity;
 	}
 
     public static void main(String [] args) {
