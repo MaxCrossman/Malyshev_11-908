@@ -1,3 +1,5 @@
+package SecondTask;
+
 public class RationalFraction {
     private int x;
     private int y;
@@ -28,7 +30,7 @@ public class RationalFraction {
         }
     }
 
-    public RationalFraction(SecondTask.RationalFraction rf){
+    public RationalFraction(RationalFraction rf){
         x = rf.x;
         y = rf.x;
         this.normalize();
@@ -48,23 +50,23 @@ public class RationalFraction {
         }
     }
 
-    public SecondTask.RationalFraction add(SecondTask.RationalFraction rf) {
+    public RationalFraction add(RationalFraction rf) {
         int nx;
         int ny;
         if (y != rf.y) {
             nx = (x * rf.y) + (rf.x * y);
             ny = y * rf.y;
         } else {
-            nx = x + rf.x;
-            ny = y;
+        nx = x + rf.x;
+        ny = y;
         }
-        SecondTask.RationalFraction nrf = new SecondTask.RationalFraction(nx,ny);
+        RationalFraction nrf = new RationalFraction(nx,ny);
         nrf.reduce();
         nrf.normalize();
         return nrf;
-    }
+        }
 
-    public void add2(SecondTask.RationalFraction rf) {
+    public void add2(RationalFraction rf) {
         if (y != rf.y) {
             x = (x * rf.y) + (rf.x * y);
             y*= rf.y;
@@ -75,7 +77,7 @@ public class RationalFraction {
         this.normalize();
     }
 
-    public SecondTask.RationalFraction sub(SecondTask.RationalFraction rf) {
+    public RationalFraction sub(RationalFraction rf) {
         int nx;
         int ny;
         if (y != rf.y) {
@@ -85,13 +87,13 @@ public class RationalFraction {
             nx = x - rf.x;
             ny = y;
         }
-        SecondTask.RationalFraction nrf = new SecondTask.RationalFraction(nx,ny);
+        RationalFraction nrf = new RationalFraction(nx,ny);
         nrf.reduce();
         nrf.normalize();
         return nrf;
     }
 
-    public void sub2(SecondTask.RationalFraction rf) {
+    public void sub2(RationalFraction rf) {
         if (y != rf.y) {
             x = (x * rf.y) - (rf.x * y);
             y*= rf.y;
@@ -102,28 +104,28 @@ public class RationalFraction {
         this.normalize();
     }
 
-    public SecondTask.RationalFraction mult(SecondTask.RationalFraction rf){
-        SecondTask.RationalFraction nrf = new SecondTask.RationalFraction(x*rf.x,y*rf.y);
+    public RationalFraction mult(RationalFraction rf){
+        RationalFraction nrf = new RationalFraction(x*rf.x,y*rf.y);
         nrf.reduce();
         nrf.normalize();
         return nrf;
     }
 
-    public void mult2(SecondTask.RationalFraction rf){
+    public void mult2(RationalFraction rf){
         x*=rf.x;
         y*=rf.y;
         this.reduce();
         this.normalize();
     }
 
-    public SecondTask.RationalFraction div(SecondTask.RationalFraction rf){
-        SecondTask.RationalFraction nrf = new SecondTask.RationalFraction(x*rf.y,y*rf.x);
+    public RationalFraction div(RationalFraction rf){
+        RationalFraction nrf = new RationalFraction(x*rf.y,y*rf.x);
         nrf.reduce();
         nrf.normalize();
         return nrf;
     }
 
-    public void div2(SecondTask.RationalFraction rf){
+    public void div2(RationalFraction rf){
         x*=rf.y;
         y*=rf.x;
         this.normalize();
@@ -137,7 +139,7 @@ public class RationalFraction {
         return (double)(x)/(double)(y);
     }
 
-    public boolean equals(SecondTask.RationalFraction rf){
+    public boolean equals(RationalFraction rf){
         rf.reduce();
         this.reduce();
         if((x==rf.x)&&(y==rf.y)){

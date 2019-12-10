@@ -10,6 +10,10 @@ public class Matrix2x2 {
         }
     }
 
+    public Matrix2x2(Matrix2x2 mx){
+        this.mx = mx.mx;
+    }
+
     public Matrix2x2(double lambda){
         mx = new double[2][2];
         for (int i = 0; i <2; i++){
