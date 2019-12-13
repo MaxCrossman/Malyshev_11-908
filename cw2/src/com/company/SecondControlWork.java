@@ -49,7 +49,7 @@ class Users {
             users[h].setLast_name(line.split(";")[2]);
             users[h].setEmail(line.split(";")[3]);
             users[h].setGender(line.split(";")[4]);
-            users[h].setMoney(line.split(";")[5]);
+            users[h].setMoney(Double.parseDouble(line.split(";")[5].substring(1)));
             users[h].setCountry(line.split(";")[6]);
             users[h].setJob(line.split(";")[7]);
             h++;
@@ -61,7 +61,7 @@ class Users {
         for (int i = 0; i < 300; i++){
             fw.write(users[i].getId()+";"+users[i].getFirst_name()
                     +";"+users[i].getLast_name()+";"+users[i].getEmail()
-                    +";"+users[i].getGender()+";"+users[i].getMoney()+";"+users[i].getCountry()+";"+users[i].getJob()+"\n");
+                    +";"+users[i].getGender()+";$"+users[i].getMoney()+";"+users[i].getCountry()+";"+users[i].getJob()+"\n");
         }
         fw.close();
     }
@@ -71,17 +71,27 @@ class Users {
         for (int i = 0; i < 300; i++){
             fw.write(users[i].getId()+";"+users[i].getFirst_name()
                     +";"+users[i].getLast_name()+";"+users[i].getEmail()
-                    +";"+users[i].getGender()+";"+users[i].getMoney()+";"+users[i].getCountry()+";"+users[i].getJob()+"\n");
+                    +";"+users[i].getGender()+";$"+users[i].getMoney()+";"+users[i].getCountry()+";"+users[i].getJob()+"\n");
         }
         fw.close();
     }
 
-    public User getUserById(int id){
+    public User getUserById(int id) throws FileNotFoundException {
         if (id > 300){
             System.out.println("Такого id не существует");
             return null;
         } else {
-            return users[id - 1];
+            FileReader fr = new FileReader(filename);
+            Scanner sc = new Scanner(fr);
+            String[] line = sc.nextLine().split(";");
+            while (sc.hasNextLine()) {
+                line = sc.nextLine().split(";");
+                if (line[0].equals(String.valueOf(id))) {
+                    break;
+                }
+            }
+            return new User(Integer.parseInt(line[0]),line[1],line[2],line[3],line[4],
+                    Double.parseDouble(line[5]),line[6],line[7]);
         }
     }
 
@@ -89,17 +99,19 @@ class Users {
         FileReader fr = new FileReader(filename);
         Scanner sc = new Scanner(fr);
         boolean found = false;
-            String[] names = sc.nextLine().split();
-            for (int i = 0; i <8; i++){
-                if (names[i]==name){
-                    return i;
-                    found = true;
-                }
+        String[] names = sc.nextLine().split(";");
+        for (int i = 0; i < 8; i++) {
+            if (names[i].equals(name)) {
+                found = true;
+                return i;
             }
-            if (!found){
-                System.out.println("нет столбца с таким названием");
-                return -1;
-            }
+        }
+        if (!found) {
+            System.out.println("нет столбца с таким названием");
+            return -1;
+        } else {
+            return -1;
+        }
     }
 
     public boolean isTheSame(int col, String string) throws FileNotFoundException {
@@ -108,7 +120,7 @@ class Users {
         String name = sc.nextLine();
         boolean found = false;
         while(sc.hasNextLine()){
-            if (sc.nextLine().split()[col-1]==string){
+            if (sc.nextLine().split(";")[col-1].equals(string)){
                 found = true;
                 break;
             }
@@ -123,7 +135,7 @@ class Users {
         String name = sc.nextLine();
         boolean found = false;
         while(sc.hasNextLine()){
-            if (sc.nextLine().split()[col-1]==string){
+            if (sc.nextLine().split(";")[col-1].equals(string)){
                 found = true;
                 break;
             }
@@ -138,7 +150,7 @@ class Users {
         try {
             FileWriter fw = new FileWriter(sc.nextLine());
             for (int i = 0; i < 300; i++){
-                if (users[i].getCountry()==country){
+                if (users[i].getJob().equals(country)){
                     fw.write(users[i].toString());
                 }
             }
@@ -149,6 +161,8 @@ class Users {
 
     }
 
+
+
     public void getUsersByJob(String job){
         System.out.println("Назовите файл: ");
         Scanner sc = new Scanner(System.in);
@@ -156,7 +170,7 @@ class Users {
         try {
             FileWriter fw = new FileWriter(sc.nextLine());
             for (int i = 0; i < 300; i++){
-                if (users[i].getJob()==job){
+                if (users[i].getJob().equals(job)){
                     fw.write(users[i].toString());
                 }
             }
@@ -182,28 +196,52 @@ class Users {
  * и сохранит его в другой файл csv.
  */
 class User {
-    private final Object Gender;
+    private enum Gender {Male, Female, Another};
     private int id;
     private String first_name;
     private String last_name;
     private String email;
-    private String gender;
-    private String money;
+    private Gender gender;
+    private double money;
     private String country;
     private String job;
 
-    public User(int id, String first_name, String last_name, String email, String money, String country, String job, ){
+    public User(int id, String first_name, String last_name, String email,String gender, String money, String country, String job){
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
-        this.gender = (String) Gender;
+        this.money = Double.parseDouble(money.substring(1));
+        this.country = country;
+        this.job = job;
+        if (gender.equals("Male")){
+            this.gender = Gender.Male;
+        } else if (gender.equals("Female")){
+            this.gender = Gender.Female;
+        } else {
+            this.gender = Gender.Another;   //there is not olny two genders;
+        }
+    }
+
+    public User(int id, String first_name, String last_name, String email,String gender, double money, String country, String job){
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
         this.money = money;
         this.country = country;
         this.job = job;
+        if (gender.equals("Male")){
+            this.gender = Gender.Male;
+        } else if (gender.equals("Female")){
+            this.gender = Gender.Female;
+        } else {
+            this.gender = Gender.Another;   //there is not olny two genders;
+        }
     }
 
-    public String getMoney() {
+
+    public double getMoney() {
         return money;
     }
 
@@ -220,7 +258,7 @@ class User {
     }
 
     public Object getGender() {
-        return Gender;
+        return gender;
     }
 
     public String getFirst_name() {
@@ -248,7 +286,13 @@ class User {
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        if (gender.equals("Male")){
+            this.gender = Gender.Male;
+        } else if (gender.equals("Female")){
+            this.gender = Gender.Female;
+        } else {
+            this.gender = Gender.Another;
+        }
     }
 
     public void setId(int id) {
@@ -259,7 +303,7 @@ class User {
         this.last_name = last_name;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
@@ -268,7 +312,7 @@ class User {
     }
 
     public String toString(){
-        return ""+id+" "+first_name+" "+last_name+" "+email+" "+Gender+" "+money+" "+country+" "+job;
+        return ""+id+" "+first_name+" "+last_name+" "+email+" "+gender+" "+money+" "+country+" "+job;
     }
 
     // id;first_name;last_name;email;gender;money;country;job
