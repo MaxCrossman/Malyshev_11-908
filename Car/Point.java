@@ -11,6 +11,7 @@ public class Point {
     }
 	
 	// public System.out.println(Point p) {
+		// super();
 		// System.out.println("("+this.x+","+this.y+")");
 	// }
 
@@ -18,7 +19,6 @@ public class Point {
             this.x = x;
             this.y = y;
     }
-
 	public Point(Point p) {
 		this.x = p.x;
 		this.y = p.y;
