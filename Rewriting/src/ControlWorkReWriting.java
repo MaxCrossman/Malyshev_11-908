@@ -20,9 +20,9 @@ public class ControlWorkReWriting {
         System.out.println(generatePassword());
         str1 = "kollob";
         System.out.println(compareStrings(str1,str2));
-        int i1 = 72;
-        int i2 = 85;
-        int i3 = 64;
+        int i1 = 7;
+        int i2 = 7;
+        int i3 = 25;
         int i4 = 55;
         System.out.println(getGCD(i1,i2));
         System.out.println(getGCD(i3,i4));
@@ -195,14 +195,40 @@ public class ControlWorkReWriting {
      * Итого (макс. 2 балла):
      */
 
-    static int getGCD(int a, int b) {
-        if (b == 0){
+   /* static int getGCD(int a, int b) {
+        if (a < b) {
+            int t = a;
+            a = b;
+            b = t;
+        }
+        if (a == b) {
             return a;
+        } else {
+            if (b == 0) {
+                return a;
+            } else {
+                return getGCD(b, a % b);
+            }
         }
-        else {
-            return getGCD(b, a % b);
+    }*/
+    static int getGCD(int a, int b) {
+        while ((a!=0)&&(b!=0)){
+            if (a > b){
+                a = a%b;
+            } else if(b > a){
+                b = b%a;
+            } else {
+                return a;
+            }
         }
+        if (a==0){
+            return b;
+        } else if (b==0){
+            return a;
+        } else {
+            return getGCD(a,b);
     }
+}
 
 }
 
