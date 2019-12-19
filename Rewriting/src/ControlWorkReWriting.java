@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 public class ControlWorkReWriting {
     /**
      * Студент Malyshev M.V.
@@ -15,7 +17,7 @@ public class ControlWorkReWriting {
         String str2 = "kollok";
         System.out.println(isPalindrome(str1)+"\n"+
                 isPalindrome(str2));
-        str1 = "128 heartbeats";
+        str1 = "128 heartbeats per 1 minute at 21:07, 31 december";
         System.out.println(fromTextSum(str1));
         System.out.println(generatePassword());
         str1 = "kollob";
@@ -71,12 +73,33 @@ public class ControlWorkReWriting {
         return b;
     }
 
-    public static int fromTextSum(String str){
+/*    public static int fromTextSum(String str){
         char [] symbols = str.toCharArray();
         int sum = 0;
         for (int i = 0; i < symbols.length; i++){
             if(checkCharDigit(symbols[i])){
                 sum+= Integer.parseInt(String.valueOf(symbols[i]));
+            }-..........
+
+        }
+        return sum;
+    }
+
+ */
+
+    public static int fromTextSum(@NotNull String str){
+        int sum = 0;
+        String string = str + " konec predlojeniya";
+        int digi = 0;
+        for (int i = 0; i < str.length(); i++){
+            if (checkCharDigit(string.charAt(i))){
+                digi += Integer.parseInt(String.valueOf(string.charAt(i)));
+                if (checkCharDigit(string.charAt(i+1))){
+                    digi = digi*10;
+                } else {
+                    sum += digi;
+                    digi = 0;
+                }
             }
         }
         return sum;
