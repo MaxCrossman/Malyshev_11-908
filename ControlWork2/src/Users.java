@@ -1,11 +1,11 @@
 import java.io.*;
 import java.util.Scanner;
 
-class Users {
+class Users implements Measurable {
     String filename;
     User[] users;
 
-    Users(String filename) throws IOException {
+    Users(String filename) throws IOException{
         load(filename);
     }
 
@@ -157,5 +157,17 @@ class Users {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public double getMeasure() throws FileNotFoundException {
+        FileReader fr = new FileReader(filename);
+        Scanner sc = new Scanner(fr);
+        String l = sc.nextLine();
+        double sum = 0;
+        while (sc.hasNextLine()){
+            sum+= Double.parseDouble(sc.nextLine().split(";")[5].substring(1));
+        }
+        return sum;
     }
 }
