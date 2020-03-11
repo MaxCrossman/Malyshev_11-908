@@ -28,7 +28,7 @@ public class RationalFraction {
         }
     }
 
-    public RationalFraction(SecondTask.RationalFraction rf){
+    public RationalFraction(RationalFraction rf){
         x = rf.x;
         y = rf.x;
         this.normalize();
@@ -48,7 +48,7 @@ public class RationalFraction {
         }
     }
 
-    public SecondTask.RationalFraction add(SecondTask.RationalFraction rf) {
+    public RationalFraction add(RationalFraction rf) {
         int nx;
         int ny;
         if (y != rf.y) {
@@ -58,13 +58,13 @@ public class RationalFraction {
             nx = x + rf.x;
             ny = y;
         }
-        SecondTask.RationalFraction nrf = new SecondTask.RationalFraction(nx,ny);
+        RationalFraction nrf = new RationalFraction(nx,ny);
         nrf.reduce();
         nrf.normalize();
         return nrf;
     }
 
-    public void add2(SecondTask.RationalFraction rf) {
+    public void add2(RationalFraction rf) {
         if (y != rf.y) {
             x = (x * rf.y) + (rf.x * y);
             y*= rf.y;
@@ -75,7 +75,7 @@ public class RationalFraction {
         this.normalize();
     }
 
-    public SecondTask.RationalFraction sub(SecondTask.RationalFraction rf) {
+    public RationalFraction sub(SecondTask.RationalFraction rf) {
         int nx;
         int ny;
         if (y != rf.y) {
