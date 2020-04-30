@@ -1,6 +1,3 @@
-//TODO решить проблему с дивайдом
-//TODO сделать метод нью лист
-
 public class MyLinkedList2 {
     Element head;
 

@@ -6,10 +6,11 @@ public class Main {
         MyLinkedList2 mll1 = new MyLinkedList2(mas1);
         mll1.println();
         MyLinkedList2 mll2 = new MyLinkedList2(mas2);
-        mll1.println();
+        mll2.println();
         mll2.insert(-4);
         mll2.insert(-4);
-        mll2.insert(5);
+        mll2.insert(-5);
+        mll2.delete(-5);
         mll2.insert(0);
         mll2.println();
         mll1.insert(6);

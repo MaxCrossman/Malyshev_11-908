@@ -11,5 +11,26 @@ public class Main {
         sa.forEach(System.out::println);
         sa.removePlurals();
         System.out.println(sa.toString());
+        long start = System.currentTimeMillis();
+        System.out.println(sa.countOfUniqueWordsUsingArrayList());
+        long time = System.currentTimeMillis() - start;
+        start += time;
+        System.out.println(time);
+        System.out.println(sa.countOfUniqueWordsUsingTreeSet());
+        time = System.currentTimeMillis() - start;
+        start += time;
+        System.out.println(time);
+        System.out.println(sa.countOfUniqueWordsUsingHashSet());
+        time = System.currentTimeMillis() - start;
+        start += time;
+        System.out.println(time);
+
+        StringArray sa2 =
+                new StringArray("C:\\Proging\\Java\\11-908-java-homeworks-MaxCrossman" +
+                                "\\Homeworks\\Third\\src\\Stishok.txt");
+        String[][] ar = sa2.topFiftyWordsInDoubleArray();
+        for (int i = 0; i < 50; i++) {
+            System.out.println(ar[0][i]+"   "+ar[1][i]);
+        }
     }
 }
